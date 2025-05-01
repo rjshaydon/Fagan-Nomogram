@@ -66,14 +66,14 @@ main {
 #output-container {
   flex: 1 1 0;
   min-width: 320px;
-  max-width: 480px;
+  max-width: 400px;
   margin: 0;
   z-index: 10;
 }
 #output {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   background: #fff;
   border-radius: 0 12px 12px 0;
@@ -169,7 +169,7 @@ main {
     z-index: 101;
   }
   #output input[type="number"] {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 /* ========== end CSS ========== */
@@ -185,33 +185,39 @@ main {
       <div id="output">
         <div id="slideup-tab">Values & Settings</div>
         <div>
-          <span>Pre-test Probability:</span>
+          <span style="font-weight:bold; font-size:0.9rem;">Pre-test Probability:</span>
           <span><input id="pretest-input" type="number" min="0.1" max="99.9" step="0.1" style="width:60px;" />%</span>
         </div>
         <div>
-          <span>Sensitivity:</span>
+          <span style="font-size:0.8rem;">Sensitivity:</span>
           <span><input id="sensitivity-input" type="number" min="0.1" max="99.9" step="0.1" style="width:60px;" />%</span>
         </div>
         <div>
-          <span>Specificity:</span>
+          <span style="font-size:0.8rem;">Specificity:</span>
           <span><input id="specificity-input" type="number" min="0.1" max="99.9" step="0.1" style="width:60px;" />%</span>
         </div>
         <hr>
-        <div style="font-weight:bold;">Post-test Probability</div>
+        <div style="font-weight:bold; font-size:0.9rem;">Post-test Probability</div>
         <div>
-          <span>Positive Test:</span>
+          <span style="font-size:0.8rem;">Positive Test:</span>
           <span><input id="post-positive-input" type="number" min="0.1" max="99.9" step="0.1" style="width:60px;color:red;" />%</span>
         </div>
         <div>
-          <span>Negative Test:</span>
+          <span style="font-size:0.8rem;">Negative Test:</span>
           <span><input id="post-negative-input" type="number" min="0.1" max="99.9" step="0.1" style="width:60px;color:green;" />%</span>
         </div>
         <hr>
-        <div style="font-weight:bold;">Likelihood Ratios (LR)</div>
-        <div>LR+<span id="lr-plus">--</span></div>
-        <div>LR−<span id="lr-minus">--</span></div>
+        <div style="font-weight:bold; font-size:0.9rem;">Likelihood Ratios (LR)</div>
+        <div>
+          <span style="font-size:0.8rem;">LR+</span>
+          <span id="lr-plus" style="font-size:0.8rem;">--</span>
+        </div>
+        <div>
+          <span style="font-size:0.8rem;">LR−</span>
+          <span id="lr-minus" style="font-size:0.8rem;">--</span>
+        </div>
         <section id="example-values" style="width:100%; margin-top:1rem; padding:1rem; background:#fff; border-radius:8px; box-shadow:0 1px 4px rgba(0,0,0,0.04);">
-          <div style="font-weight:bold;">Example values</div>
+          <div style="font-weight:bold; font-size:0.9rem;">Example values</div>
           <div style="display:flex; gap:1rem; margin-top:0.5rem;">
             <div style="flex:1;">
               <div id="disease-label" style="font-weight:bold; font-size:0.8rem;">Disease</div>
@@ -224,7 +230,7 @@ main {
                 <option value="Sepsis">Sepsis</option>
                 <option value="Septic Arthritis">Septic Arthritis</option>
                 <option value="Acute Heart Failure">Acute Heart Failure</option>
-                <option value="Infection with CRP">Infection with CRP</option>
+                <option value="Infection – subjective CRP">Infection – subjective CRP</option>
               </select>
             </div>
             <div style="flex:1;">
@@ -248,24 +254,39 @@ main {
             <!-- Example values will appear here when selected -->
           </div>
           <div id="pe-tests" style="display: none; margin-top: 0.5rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
-            <div style="font-weight:bold; margin-bottom:0.5rem;">PE Tests</div>
+            <div style="font-weight:bold; font-size:0.8rem; margin-bottom:0.5rem;">PE Tests</div>
             <div>
-              <div>D-dimer:</div>
-              <label><input type="radio" name="pe-test-ddimer" value="" checked>Unknown</label>
-              <label><input type="radio" name="pe-test-ddimer" value="neg">Negative</label>
-              <label><input type="radio" name="pe-test-ddimer" value="pos">Positive</label>
+              <div style="font-size:0.7rem;">D-dimer:</div>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-ddimer" value="" checked>Unknown</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-ddimer" value="neg">Negative</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-ddimer" value="pos">Positive</label>
             </div>
             <div style="margin-top:0.5rem;">
-              <div>CTPA:</div>
-              <label><input type="radio" name="pe-test-ctpa" value="" checked>Unknown</label>
-              <label><input type="radio" name="pe-test-ctpa" value="neg">Negative</label>
-              <label><input type="radio" name="pe-test-ctpa" value="pos">Positive</label>
+              <div style="font-size:0.7rem;">CTPA:</div>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-ctpa" value="" checked>Unknown</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-ctpa" value="neg">Negative</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-ctpa" value="pos">Positive</label>
             </div>
             <div style="margin-top:0.5rem;">
-              <div>V/Q scan:</div>
-              <label><input type="radio" name="pe-test-vq" value="" checked>Unknown</label>
-              <label><input type="radio" name="pe-test-vq" value="neg">Negative</label>
-              <label><input type="radio" name="pe-test-vq" value="pos">Positive</label>
+              <div style="font-size:0.7rem;">V/Q scan:</div>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-vq" value="" checked>Unknown</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-vq" value="neg">Negative</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="pe-test-vq" value="pos">Positive</label>
+            </div>
+          </div>
+          <div id="dvt-tests" style="display: none; margin-top:0.5rem; padding:0.5rem; border:1px solid #ccc; border-radius:4px;">
+            <div style="font-weight:bold; font-size:0.8rem; margin-bottom:0.5rem;">DVT Tests</div>
+            <div>
+              <div style="font-size:0.7rem;">D-dimer:</div>
+              <label style="font-size:0.6rem;"><input type="radio" name="dvt-test-ddimer" value="" checked>Unknown</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="dvt-test-ddimer" value="neg">Negative</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="dvt-test-ddimer" value="pos">Positive</label>
+            </div>
+            <div style="margin-top:0.5rem;">
+              <div style="font-size:0.7rem;">Ultrasound:</div>
+              <label style="font-size:0.6rem;"><input type="radio" name="dvt-test-ultrasound" value="" checked>Unknown</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="dvt-test-ultrasound" value="neg">Negative</label>
+              <label style="font-size:0.6rem;"><input type="radio" name="dvt-test-ultrasound" value="pos">Positive</label>
             </div>
           </div>
         </section>
@@ -415,12 +436,26 @@ function handleInput(e){
     return;
   }
   if(id==='post-positive-input'){
+    // clear example selection and hide controls when PtP+ changes
+    exampleMenu.value = '';
+    riskLabel.style.display = 'none';
+    peRiskMenu.style.display = 'none';
+    testSection.style.display = 'none';
+    document.getElementById('pe-tests').style.display = 'none';
+
     S.postPos = clamp(v, PROB_MIN, PROB_MAX);
     recalc('postPos');
     uiRefresh();
     return;
   }
   if(id==='post-negative-input'){
+    // clear example selection and hide controls when PtP- changes
+    exampleMenu.value = '';
+    riskLabel.style.display = 'none';
+    peRiskMenu.style.display = 'none';
+    testSection.style.display = 'none';
+    document.getElementById('pe-tests').style.display = 'none';
+
     S.postNeg = clamp(v,PROB_MIN,PROB_MAX);
     recalc('postNeg');
     uiRefresh();
@@ -596,6 +631,9 @@ function pMove(e) {
     document.getElementById('pe-risk-menu').style.display = 'none';
     document.getElementById('test-section').style.display = 'none';
     document.getElementById('pe-tests').style.display = 'none';
+    if (dvtTests) dvtTests.style.display = 'none';
+    // exit combined (blue-line) mode when dragging a post-test handle
+    S.combinedMode = false;
     const rawPos = yToProb(ycl, true);
     // compute extremes for current LR+
     const maxPos = clamp(prob(odds(PROB_MAX) * S.lrPlus), PROB_MIN, PROB_MAX);
@@ -614,6 +652,9 @@ function pMove(e) {
     document.getElementById('pe-risk-menu').style.display = 'none';
     document.getElementById('test-section').style.display = 'none';
     document.getElementById('pe-tests').style.display = 'none';
+    if (dvtTests) dvtTests.style.display = 'none';
+    // exit combined (blue-line) mode when dragging a post-test handle
+    S.combinedMode = false;
     const rawNeg = yToProb(ycl, true);
     // compute extremes for current LR–
     const maxNeg = clamp(prob(odds(PROB_MAX) * S.lrMinus), PROB_MIN, PROB_MAX);
@@ -815,196 +856,155 @@ const testSection    = document.getElementById('test-section');
 const testMenu       = document.getElementById('test-menu');
 // const singleTestName = document.getElementById('single-test-name');
 const multiTests     = document.getElementById('pe-tests');
+const dvtTests       = document.getElementById('dvt-tests');
 
 // placeholder for diseases without stratification
 const placeholder = 'PrP: --, Sn: --, Sp: --, LR+: --, LR−: --, PtP+: --, PtP−: --';
 
-exampleMenu.addEventListener('change', function(e) {
-  const key = e.target.value;
-  // reset all PE test selections back to “Unknown”
-  document.querySelectorAll('#pe-tests input[type="radio"]').forEach(radio => {
-    radio.checked = (radio.value === '');
-  });
-  // Reset risk menu
-  peRiskMenu.style.display = 'none';
-  riskLabel.style.display = 'none';
-  peRiskMenu.value = '';
-  exampleData.style.display = '';
-
-  if (key === 'PE') {
-    // Show PE risk submenu
-    peRiskMenu.style.display = '';
-    riskLabel.style.display = '';
-    exampleData.style.display = 'none';
-    peRiskMenu.innerHTML = `
-      <option value="">-- Select PE risk level --</option>
-      <option value="low">Low (~1.3%)</option>
-      <option value="intermediate">Intermediate (~16.2%)</option>
-      <option value="high">High (~40.6%)</option>`;
-    peRiskMenu.value = 'intermediate';  // ← automatically pick “Intermediate”
-    // apply Pre-test probability according to default risk level
-    if (key === 'PE') {
-      const peMap = { low: 1.3, intermediate: 16.2, high: 40.6 };
-      S.pre = peMap['intermediate'];
-      inpPre.value = fmt(S.pre);
-      updatePostProbs();
-    }
-    uiRefresh();
-    // show Test section for PE
-    testSection.style.display = '';
-    // populate PE test options with individual tests first, Multiple tests last
-    testMenu.innerHTML = `
-      <option value="">-- Select test --</option>
-      <option value="ddimer">D-dimer</option>
-      <option value="ctpa">CTPA</option>
-      <option value="vq">V/Q scan</option>
-      <option value="multiple">Multiple tests</option>`;
-    testMenu.value = 'ddimer';
-    // set Sens/Spec for default D-dimer
-    S.sens = 0.99;
-    S.spec = 0.40;
-    recalc('sens');
-    uiRefresh();
-    // singleTestName.style.display = 'none';
-    multiTests.style.display = 'none';
-    S.combinedMode = false;
-    [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = true);
-    chkKeepLR.disabled = true;
-  } else {
-    // hide PE-specific elements
-    testSection.style.display = '';
-    document.getElementById('pe-tests').style.display = 'none';
-    S.combinedMode = false;
-    // Handle DVT risk stratification
-    if (key === 'DVT') {
-      riskLabel.style.display = '';
-      peRiskMenu.style.display = '';
-      peRiskMenu.innerHTML = `
+// Unified testsByDisease object for all examples
+const testsByDisease = {
+  'PE': {
+    pre: 16.2,
+    risk: {
+      default: 'intermediate',
+      options: `
+        <option value="">-- Select PE risk level --</option>
+        <option value="low">Low (~1.3%)</option>
+        <option value="intermediate">Intermediate (~16.2%)</option>
+        <option value="high">High (~40.6%)</option>`
+    },
+    tests: [
+      { label: 'D-dimer', value: 'ddimer', sn: 0.99, sp: 0.40 },
+      { label: 'CTPA',    value: 'ctpa',   sn: 0.90, sp: 0.96 },
+      { label: 'V/Q scan',value: 'vq',     sn: 0.774, sp: 0.977 }
+    ]
+  },
+  'DVT': {
+    pre: 5,
+    risk: {
+      default: 'low',
+      options: `
         <option value="">-- Select DVT risk level --</option>
         <option value="low">Low (~5%)</option>
         <option value="moderate">Moderate (~17%)</option>
-        <option value="high">High (~53%)</option>`;
-        peRiskMenu.value = 'low';  // ← automatically pick “Low”
-    } else {
-      riskLabel.style.display = 'none';
-      peRiskMenu.style.display = 'none';
-    }
-
-    // set default PrP and populate test menu
-    const testsByDisease = {
-      'DVT': {
-        pre: 5,
-        tests: [
-          { label: 'D-dimer', sn: 0.95, sp: 0.50 },
-          { label: 'Ultrasound', sn: 0.95, sp: 0.96 }
-        ]
-      },
-      'Bacterial Pneumonia': {
-        pre: 25,
-        tests: [
-          { label: 'CXR', sn: 0.69, sp: 0.83 }
-        ]
-      },
-      'Appendicitis': {
-        pre: 25,
-        tests: [
-          { label: 'AIR Score ≥5', sn: 0.92, sp: 0.63 },
-          { label: 'AIR Score ≥8', sn: 0.20, sp: 0.97 },
-          { label: 'Ultrasound', sn: 0.85, sp: 0.90 },
-          { label: 'CT', sn: 0.94, sp: 0.95 }
-        ]
-      },
-      'Sepsis': {
-        pre: 10,
-        tests: [
-          { label: 'CRP', sn: 0.80, sp: 0.60 },
-          { label: 'PCT', sn: 0.76, sp: 0.70 }
-        ]
-      },
-      'Septic Arthritis': {
-        pre: 10,
-        tests: [
-          { label: 'CRP >10 mg/L', sn: 0.90, sp: 0.75 }
-        ]
-      },
-      'Infection with CRP': {
-        pre: 10,
-        tests: [
-          { label: 'Best case CRP', sn: 0.778, sp: 0.741 }
-        ]
-      },
-      'Acute Heart Failure': {
-        pre: 25,
-        tests: [
-          { label: 'BNP', sn: 0.90, sp: 0.76 },
-          { label: 'NT-proBNP', sn: 0.90, sp: 0.75 }
-        ]
-      },
-      'PE': {
-        risk: {
-          default: 'intermediate', // changed from 'low'
-          levels: {
-            low: 1.3,
-            intermediate: 16.2,
-            high: 40.6
-          }
-        }
-      }
-    };
-
-    if (testsByDisease[key]) {
-      const data = testsByDisease[key];
-
-      // --- default Pre‑test probability ---
-      S.pre = clamp(data.pre, PROB_MIN, PROB_MAX);
-      inpPre.value = fmt(S.pre);
-
-      // --- default Sn / Sp from FIRST test ---
-      if (data.tests && data.tests.length) {
-        S.sens = data.tests[0].sn;
-        S.spec = data.tests[0].sp;
-        recalc('sens');          // recompute LRs & PtPs from Sn/Sp
-      } else {
-        updatePostProbs();       // fallback (should never trigger)
-      }
-
-      // --- populate test selector ---
-      const options = data.tests.map(t => `<option value="${t.label}">${t.label}</option>`).join('');
-      if (data.tests.length === 1) {
-        // only one test → no placeholder
-        testMenu.innerHTML = options;
-      } else {
-        // multiple tests → include placeholder
-        testMenu.innerHTML = `<option value="">-- Select test --</option>${options}`;
-      }
-      // Auto-select the first test
-      testMenu.value = data.tests[0].label;
-
-      // disable manual edits for now
-      [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = true);
-      chkKeepLR.disabled = true;
-
-      uiRefresh();
-    } else {
-      // fallback
-      S.pre = 50;
-      updatePostProbs();
-      testSection.style.display = 'none';
-      [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = false);
-      chkKeepLR.disabled = false;
-      uiRefresh();                       /* ← add this line */
-    }
+        <option value="high">High (~53%)</option>`
+    },
+    tests: [
+      { label: 'D-dimer', value: 'D-dimer', sn: 0.95, sp: 0.50 },
+      { label: 'Ultrasound', value: 'Ultrasound', sn: 0.95, sp: 0.96 }
+    ]
+  },
+  'Bacterial Pneumonia': {
+    pre: 25,
+    tests: [
+      { label: 'CXR', value: 'CXR', sn: 0.69, sp: 0.83 }
+    ]
+  },
+  'Appendicitis': {
+    pre: 25,
+    tests: [
+      { label: 'AIR Score ≥5', value: 'AIR Score ≥5', sn: 0.92, sp: 0.63 },
+      { label: 'AIR Score ≥8', value: 'AIR Score ≥8', sn: 0.20, sp: 0.97 },
+      { label: 'Ultrasound', value: 'Ultrasound', sn: 0.85, sp: 0.90 },
+      { label: 'CT', value: 'CT', sn: 0.94, sp: 0.95 }
+    ]
+  },
+  'Sepsis': {
+    pre: 10,
+    tests: [
+      { label: 'CRP', value: 'CRP', sn: 0.80, sp: 0.60 },
+      { label: 'PCT', value: 'PCT', sn: 0.76, sp: 0.70 }
+    ]
+  },
+  'Septic Arthritis': {
+    pre: 10,
+    tests: [
+      { label: 'CRP >10 mg/L', value: 'CRP >10 mg/L', sn: 0.90, sp: 0.75 }
+    ]
+  },
+  'Infection – subjective CRP': {
+    pre: 10,
+    tests: [
+      { label: 'Best case CRP', value: 'Best case CRP', sn: 0.778, sp: 0.741 }
+    ]
+  },
+  'Acute Heart Failure': {
+    pre: 25,
+    tests: [
+      { label: 'BNP', value: 'BNP', sn: 0.90, sp: 0.76 },
+      { label: 'NT-proBNP', value: 'NT-proBNP', sn: 0.90, sp: 0.75 }
+    ]
   }
+};
+
+exampleMenu.addEventListener('change', function(e) {
+  const key = e.target.value;
   exampleMenu.blur();
+  // hide any existing risk or test panels (preserve exampleMenu.value)
+  riskLabel.style.display = 'none';
+  peRiskMenu.style.display = 'none';
+  testSection.style.display = 'none';
+  document.getElementById('pe-tests').style.display = 'none';
+  // if DVT multi-tests exist
+  const dvtPanel = document.getElementById('dvt-tests');
+  if (dvtPanel) dvtPanel.style.display = 'none';
+  // re-enable inputs
+  [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = false);
+  chkKeepLR.disabled = false;
+  S.combinedMode = false;
+
+  const data = testsByDisease[key];
+  if (!data) return;
+
+  // Show or hide the risk-level menu
+  if (data.risk) {
+    riskLabel.style.display = '';
+    peRiskMenu.style.display = '';
+    peRiskMenu.innerHTML = data.risk.options;
+    peRiskMenu.value = data.risk.default;
+  } else {
+    riskLabel.style.display = 'none';
+    peRiskMenu.style.display = 'none';
+  }
+
+  // Set pre-test probability
+  S.pre = clamp(data.pre, PROB_MIN, PROB_MAX);
+  inpPre.value = fmt(S.pre);
+
+  // Initialize Sensitivity/Specificity from the first test
+  S.sens = data.tests[0].sn;
+  S.spec = data.tests[0].sp;
+  recalc('sens');
+
+  // Populate the Test menu
+  testSection.style.display = '';
+  const opts = data.tests
+    .map(t => `<option value="${t.value}">${t.label}</option>`)
+    .join('');
+  if (data.tests.length === 1) {
+    testMenu.innerHTML = opts;
+  } else {
+    testMenu.innerHTML = `<option value="">-- Select test --</option>${opts}<option value="multiple">Multiple Tests</option>`;
+  }
+  testMenu.value = data.tests[0].value;
+
+  // Disable manual edits while example is active
+  [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = true);
+  chkKeepLR.disabled = true;
+
+  uiRefresh();
 });
 
 // Test selection handler
 testMenu.addEventListener('change', function(e) {
   // reset PE multi-test selections to Unknown
   document.querySelectorAll('#pe-tests input[type="radio"]').forEach(radio => radio.checked = (radio.value === ''));
+  // reset DVT multi-test selections to Unknown
+  if (dvtTests) document.querySelectorAll('#dvt-tests input[type="radio"]').forEach(radio => radio.checked = (radio.value === ''));
   const val = e.target.value;
-  // hide multi-test grid by default
+  // hide both PE and DVT multi-test grids by default
   multiTests.style.display = 'none';
+  if (dvtTests) dvtTests.style.display = 'none';
   S.combinedMode = false;
 
   // mapping for single tests
@@ -1021,10 +1021,16 @@ testMenu.addEventListener('change', function(e) {
     recalc('sens');
     uiRefresh();
   } else if (val === 'multiple') {
-    // multiple tests → show grid, combined mode
-    multiTests.style.display = '';
-    S.combinedMode = true;
-    computePECombinedLR();
+    // multiple tests → show appropriate grid
+    if (exampleMenu.value === 'PE') {
+      multiTests.style.display = '';
+      S.combinedMode = true;
+      computePECombinedLR();
+    } else if (exampleMenu.value === 'DVT') {
+      if (dvtTests) dvtTests.style.display = '';
+      S.combinedMode = true;
+      computeDVTCombinedLR();
+    }
   } else {
     // no test → LRs = 1, single-line
     S.lrPlus  = 1;
@@ -1034,7 +1040,7 @@ testMenu.addEventListener('change', function(e) {
   }
 
   // Also handle non-PE example test mapping
-  if (!exampleMenu.value || exampleMenu.value === 'PE') return;
+  if (!exampleMenu.value || exampleMenu.value === 'PE' || val === 'multiple') return;
 
   const selected = testMenu.value;
   const allMappings = {
@@ -1120,12 +1126,40 @@ function computePECombinedLR() {
   uiRefresh();
 }
 
+// DVT multi-test likelihood combination
+function computeDVTCombinedLR() {
+  S.combinedMode = true;
+  const mapping = {
+    'dvt-test-ddimer':    { sn:0.95, sp:0.50 },
+    'dvt-test-ultrasound':{ sn:0.95, sp:0.96 }
+  };
+  let combinedLR = 1;
+  Object.keys(mapping).forEach(name => {
+    const val = document.querySelector(`input[name="${name}"]:checked`).value;
+    const {sn, sp} = mapping[name];
+    const lrPlus  = sn/(1-sp);
+    const lrMinus = (1-sn)/sp;
+    if (val === 'pos') combinedLR *= lrPlus;
+    else if (val === 'neg') combinedLR *= lrMinus;
+  });
+  S.lrPlus = combinedLR;
+  updatePostProbs();
+  uiRefresh();
+}
+// attach DVT radio listeners
+if (dvtTests) {
+  document.querySelectorAll('#dvt-tests input[type="radio"]').forEach(radio =>
+    radio.addEventListener('change', computeDVTCombinedLR)
+  );
+}
+
 function resetExampleState() {
   // clear selection
   exampleMenu.value = '';
   // hide PE sub-controls
   peRiskMenu.style.display = 'none';
   document.getElementById('pe-tests').style.display = 'none';
+  if (dvtTests) dvtTests.style.display = 'none';
   testSection.style.display = 'none';
   exampleData.style.display = 'none';
 
@@ -1133,6 +1167,12 @@ function resetExampleState() {
   document.querySelectorAll('#pe-tests input[type="radio"]').forEach(radio => {
     radio.checked = (radio.value === '');
   });
+  // reset all DVT test selections back to “Unknown”
+  if (dvtTests) {
+    document.querySelectorAll('#dvt-tests input[type="radio"]').forEach(radio => {
+      radio.checked = (radio.value === '');
+    });
+  }
 
   // re-enable all inputs
   [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = false);
