@@ -692,6 +692,9 @@ function pMove(e) {
     document.getElementById('test-section').style.display = 'none';
     document.getElementById('pe-tests').style.display = 'none';
     if (dvtTests) dvtTests.style.display = 'none';
+    // re-enable manual inputs when no test is selected
+    [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = false);
+    chkKeepLR.disabled = false;
     // exit combined (blue-line) mode when dragging a post-test handle
     S.combinedMode = false;
     const rawPos = yToProb(ycl, true);
@@ -713,6 +716,9 @@ function pMove(e) {
     document.getElementById('test-section').style.display = 'none';
     document.getElementById('pe-tests').style.display = 'none';
     if (dvtTests) dvtTests.style.display = 'none';
+    // re-enable manual inputs when no test is selected
+    [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = false);
+    chkKeepLR.disabled = false;
     // exit combined (blue-line) mode when dragging a post-test handle
     S.combinedMode = false;
     const rawNeg = yToProb(ycl, true);
@@ -787,13 +793,16 @@ function drawScale(x,isLeft,label){
   [0.1,0.5,1,2,5,10,25,50,75,90,95,98,99,99.5,99.9].forEach(p=>{
     const y=probToY(p,!isLeft);
     ctx.beginPath();ctx.moveTo(x-6,y);ctx.lineTo(x+6,y);ctx.stroke();
-    ctx.fillText(fmt(p),isLeft?x-8:x+8,y+4);
+    ctx.fillText(fmt(p) + '%', isLeft ? x - 8 : x + 8, y + 4);
   });
-  // draw label centered above scale
-  ctx.font='bold 13px system-ui';
+  // draw two‑line label centred above the scale
+  ctx.font = 'bold 13px system-ui';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'bottom';
-  ctx.fillText(label, x, SCALE_Y0 - 10);
+  // first line: the supplied label (e.g., “Pre‑test” / “Post‑test”)
+  ctx.fillText(label, x, SCALE_Y0 - 24);
+  // second line: the word “Probability” just beneath the first
+  ctx.fillText('Probability', x, SCALE_Y0 - 10);
   ctx.restore();
 }
 function drawLR(x){
