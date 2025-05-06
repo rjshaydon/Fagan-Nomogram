@@ -281,23 +281,44 @@ main {
                 <option value="Sepsis">Sepsis</option>
                 <option value="Septic Arthritis">Septic Arthritis</option>
                 <option value="Acute Heart Failure">Acute Heart Failure</option>
+                <option value="Acute Cholecystitis">Acute Cholecystitis</option>
+                <option value="Aortic Dissection">Aortic Dissection</option>
+                <option value="Testicular Torsion">Testicular Torsion</option>
+                <option value="Ovarian Torsion">Ovarian Torsion</option>
+                <option value="Ectopic Pregnancy">Ectopic Pregnancy</option>
               </select>
             </div>
             <div style="flex:1;">
-              <div id="risk-label" style="display:none; font-weight:bold; font-size:0.8rem;">Risk level</div>
-              <select id="pe-risk-menu" style="display:none; width:100%; margin-top:0.25rem;">
-                <option value="">-- Select PE risk level --</option>
-                <option value="low">Low (~1.3%)</option>
-                <option value="intermediate">Intermediate (~16.2%)</option>
-                <option value="high">High (~40.6%)</option>
-              </select>
+          <div id="risk-label" style="display:none; font-weight:bold; font-size:0.8rem;">Risk level</div>
+          <select id="pe-risk-menu" style="display:none; width:100%; margin-top:0.25rem;">
+            <option value="">-- Select PE risk level --</option>
+            <option value="low">Low (~1.3%)</option>
+            <option value="intermediate">Intermediate (~16.2%)</option>
+            <option value="high">High (~40.6%)</option>
+          </select>
             </div>
           </div>
           <div id="test-section" style="display:none; margin-top:0.5rem;">
-            <label style="font-weight:bold; font-size:0.8rem;">Test:
-              <select id="test-menu" style="margin-left:0.5rem;">
-                <option value="">-- Select test --</option>
-              </select>
+            <label style="font-weight:bold; font-size:0.8rem; display:block;">
+              Test:
+              <div style="display:inline-block; position:relative; margin-left:0.5rem;">
+                <select id="test-menu">
+                  <option value="">-- Select test --</option>
+                </select>
+                <div id="test-caveat"
+                     style="display:none;
+                            position:absolute;
+                            top:100%;
+                            left:50%;
+                            transform:translateX(-50%);
+                            font-size:0.6rem;
+                            font-style:italic;
+                            margin-top:0.25rem;
+                            font-weight: normal;
+                            white-space: nowrap;">
+                  *specificity value approximate
+                </div>
+              </div>
             </label>
           </div>
           <div id="example-data" style="display: none; margin-top: 0.5rem;">
@@ -338,6 +359,39 @@ main {
               <label style="font-size:0.6rem;"><input type="radio" name="dvt-test-ultrasound" value="neg">Negative</label>
               <label style="font-size:0.6rem;"><input type="radio" name="dvt-test-ultrasound" value="pos">Positive</label>
             </div>
+          </div>
+          <div id="appendicitis-tests" style="display:none; margin-top:0.5rem; padding:0.5rem; border:1px solid #ccc; border-radius:4px;">
+            <div style="font-weight:bold; font-size:0.8rem; margin-bottom:0.5rem;">Appendicitis Tests</div>
+            <div style="font-size:0.7rem;">Ultrasound:</div>
+            <label style="font-size:0.6rem;"><input type="radio" name="appendicitis-test-ultrasound" value="" checked>Unknown</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="appendicitis-test-ultrasound" value="neg">Negative</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="appendicitis-test-ultrasound" value="pos">Positive</label>
+            <div style="margin-top:0.5rem; font-size:0.7rem;">CT:</div>
+            <label style="font-size:0.6rem;"><input type="radio" name="appendicitis-test-ct" value="" checked>Unknown</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="appendicitis-test-ct" value="neg">Negative</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="appendicitis-test-ct" value="pos">Positive</label>
+          </div>
+          <div id="sepsis-tests" style="display:none; margin-top:0.5rem; padding:0.5rem; border:1px solid #ccc; border-radius:4px;">
+            <div style="font-weight:bold; font-size:0.8rem; margin-bottom:0.5rem;">Sepsis Tests</div>
+            <div style="font-size:0.7rem;">CRP:</div>
+            <label style="font-size:0.6rem;"><input type="radio" name="sepsis-test-crp" value="" checked>Unknown</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="sepsis-test-crp" value="neg">Negative</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="sepsis-test-crp" value="pos">Positive</label>
+            <div style="margin-top:0.5rem; font-size:0.7rem;">PCT:</div>
+            <label style="font-size:0.6rem;"><input type="radio" name="sepsis-test-pct" value="" checked>Unknown</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="sepsis-test-pct" value="neg">Negative</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="sepsis-test-pct" value="pos">Positive</label>
+          </div>
+          <div id="ahf-tests" style="display:none; margin-top:0.5rem; padding:0.5rem; border:1px solid #ccc; border-radius:4px;">
+            <div style="font-weight:bold; font-size:0.8rem; margin-bottom:0.5rem;">Acute Heart Failure Tests</div>
+            <div style="font-size:0.7rem;">BNP:</div>
+            <label style="font-size:0.6rem;"><input type="radio" name="ahf-test-bnp" value="" checked>Unknown</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="ahf-test-bnp" value="neg">Negative</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="ahf-test-bnp" value="pos">Positive</label>
+            <div style="margin-top:0.5rem; font-size:0.7rem;">NT-proBNP:</div>
+            <label style="font-size:0.6rem;"><input type="radio" name="ahf-test-ntprobnp" value="" checked>Unknown</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="ahf-test-ntprobnp" value="neg">Negative</label>
+            <label style="font-size:0.6rem;"><input type="radio" name="ahf-test-ntprobnp" value="pos">Positive</label>
           </div>
         </section>
         <section id="settings-section" style="margin-top:1rem;padding:1rem;background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
@@ -971,6 +1025,20 @@ const testMenu       = document.getElementById('test-menu');
 // const singleTestName = document.getElementById('single-test-name');
 const multiTests     = document.getElementById('pe-tests');
 const dvtTests       = document.getElementById('dvt-tests');
+const appendicitisTests = document.getElementById('appendicitis-tests');
+const sepsisTests       = document.getElementById('sepsis-tests');
+const ahfTests          = document.getElementById('ahf-tests');
+
+// Helper to show/hide the D-dimer caveat
+function updateTestCaveat() {
+  const testCaveat = document.getElementById('test-caveat');
+  const v = document.getElementById('test-menu').value.toLowerCase();
+  if (v === 'ddimer' || v.includes('d-dimer')) {
+    testCaveat.style.display = '';
+  } else {
+    testCaveat.style.display = 'none';
+  }
+}
 
 // placeholder for diseases without stratification
 const placeholder = 'PrP: --, Sn: --, Sp: --, LR+: --, LR−: --, PtP+: --, PtP−: --';
@@ -1048,7 +1116,38 @@ const testsByDisease = {
       { label: 'BNP', value: 'BNP', sn: 0.90, sp: 0.76 },
       { label: 'NT-proBNP', value: 'NT-proBNP', sn: 0.90, sp: 0.75 }
     ]
-  }
+  },
+  'Acute Cholecystitis': {
+    pre: 25,
+    tests: [
+      { label: 'Abdominal Ultrasound', value: 'Ultrasound', sn: 0.81, sp: 0.83 }
+    ]
+  },
+  'Aortic Dissection': {
+    pre: 1,
+    tests: [
+      { label: 'D-dimer (400 ng/mL)', value: 'D-dimer-400', sn: 0.949, sp: 0.48 },
+      { label: 'D-dimer (500 ng/mL)', value: 'D-dimer-500', sn: 0.93, sp: 0.50 }
+    ]
+  },
+  'Testicular Torsion': {
+    pre: 10,
+    tests: [
+      { label: 'Doppler Ultrasound', value: 'Ultrasound', sn: 0.919, sp: 0.989 }
+    ]
+  },
+  'Ovarian Torsion': {
+    pre: 10,
+    tests: [
+      { label: 'Doppler Ultrasound', value: 'Ultrasound', sn: 0.60, sp: 0.889 }
+    ]
+  },
+  'Ectopic Pregnancy': {
+    pre: 10,
+    tests: [
+      { label: 'Transvaginal Ultrasound', value: 'TVUS', sn: 0.93, sp: 0.97 }
+    ]
+  },
 };
 
 exampleMenu.addEventListener('change', function(e) {
@@ -1062,6 +1161,28 @@ exampleMenu.addEventListener('change', function(e) {
   // if DVT multi-tests exist
   const dvtPanel = document.getElementById('dvt-tests');
   if (dvtPanel) dvtPanel.style.display = 'none';
+  // --- Reset and hide multi-test panels for new diseases ---
+  // reset and hide Appendicitis panel
+  const appendicitisTests = document.getElementById('appendicitis-tests');
+  if (appendicitisTests) {
+    document.querySelectorAll('#appendicitis-tests input[type="radio"]')
+            .forEach(radio => radio.checked = (radio.value === ''));
+    appendicitisTests.style.display = 'none';
+  }
+  // reset and hide Sepsis panel
+  const sepsisTests = document.getElementById('sepsis-tests');
+  if (sepsisTests) {
+    document.querySelectorAll('#sepsis-tests input[type="radio"]')
+            .forEach(radio => radio.checked = (radio.value === ''));
+    sepsisTests.style.display = 'none';
+  }
+  // reset and hide Acute Heart Failure panel
+  const ahfTests = document.getElementById('ahf-tests');
+  if (ahfTests) {
+    document.querySelectorAll('#ahf-tests input[type="radio"]')
+            .forEach(radio => radio.checked = (radio.value === ''));
+    ahfTests.style.display = 'none';
+  }
   // re-enable inputs
   [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = false);
   chkKeepLR.disabled = false;
@@ -1095,12 +1216,14 @@ exampleMenu.addEventListener('change', function(e) {
   const opts = data.tests
     .map(t => `<option value="${t.value}">${t.label}</option>`)
     .join('');
-  if (data.tests.length === 1) {
+  if (data.tests.length === 1 || key === 'Aortic Dissection') {
     testMenu.innerHTML = opts;
   } else {
     testMenu.innerHTML = `<option value="">-- Select test --</option>${opts}<option value="multiple">Multiple Tests</option>`;
   }
   testMenu.value = data.tests[0].value;
+  // Update caveat after setting default test
+  updateTestCaveat();
 
   // Disable manual edits while example is active
   [inpPos, inpNeg, inpSens, inpSpec].forEach(el => el.disabled = true);
@@ -1115,10 +1238,17 @@ testMenu.addEventListener('change', function(e) {
   document.querySelectorAll('#pe-tests input[type="radio"]').forEach(radio => radio.checked = (radio.value === ''));
   // reset DVT multi-test selections to Unknown
   if (dvtTests) document.querySelectorAll('#dvt-tests input[type="radio"]').forEach(radio => radio.checked = (radio.value === ''));
+  // reset new panels to Unknown
+  if (appendicitisTests) document.querySelectorAll('#appendicitis-tests input[type="radio"]').forEach(radio => radio.checked = (radio.value === ''));
+  if (sepsisTests) document.querySelectorAll('#sepsis-tests input[type="radio"]').forEach(radio => radio.checked = (radio.value === ''));
+  if (ahfTests) document.querySelectorAll('#ahf-tests input[type="radio"]').forEach(radio => radio.checked = (radio.value === ''));
   const val = e.target.value;
-  // hide both PE and DVT multi-test grids by default
+  // hide all multi-test grids by default
   multiTests.style.display = 'none';
   if (dvtTests) dvtTests.style.display = 'none';
+  if (appendicitisTests) appendicitisTests.style.display = 'none';
+  if (sepsisTests)       sepsisTests.style.display = 'none';
+  if (ahfTests)          ahfTests.style.display = 'none';
   S.combinedMode = false;
 
   // mapping for single tests
@@ -1144,6 +1274,18 @@ testMenu.addEventListener('change', function(e) {
       if (dvtTests) dvtTests.style.display = '';
       S.combinedMode = true;
       computeDVTCombinedLR();
+    } else if (exampleMenu.value === 'Appendicitis') {
+      if (appendicitisTests) appendicitisTests.style.display = '';
+      S.combinedMode = true;
+      computeAppendicitisCombinedLR();
+    } else if (exampleMenu.value === 'Sepsis') {
+      if (sepsisTests) sepsisTests.style.display = '';
+      S.combinedMode = true;
+      computeSepsisCombinedLR();
+    } else if (exampleMenu.value === 'Acute Heart Failure') {
+      if (ahfTests) ahfTests.style.display = '';
+      S.combinedMode = true;
+      computeAHFCombinedLR();
     }
   } else {
     // no test → LRs = 1, single-line
@@ -1154,11 +1296,17 @@ testMenu.addEventListener('change', function(e) {
   }
 
   // Also handle non-PE example test mapping
-  if (!exampleMenu.value || exampleMenu.value === 'PE' || val === 'multiple') return;
+  if (!exampleMenu.value || exampleMenu.value === 'PE' || val === 'multiple') {
+    // Update caveat whenever the test selection changes
+    updateTestCaveat();
+    return;
+  }
 
   const selected = testMenu.value;
   const allMappings = {
     'D-dimer': { sn: 0.95, sp: 0.50 },
+    'D-dimer-400': { sn: 0.949, sp: 0.48 },
+    'D-dimer-500': { sn: 0.93,  sp: 0.50 },
     'Ultrasound': { sn: 0.95, sp: 0.96 },
     'CXR': { sn: 0.69, sp: 0.83 },
     'AIR Score ≥5': { sn: 0.92, sp: 0.63 },
@@ -1181,6 +1329,8 @@ testMenu.addEventListener('change', function(e) {
 
   uiRefresh();
   testMenu.blur();
+  // Update caveat whenever the test selection changes
+  updateTestCaveat();
 });
 
 // PE risk stratification logic
@@ -1266,6 +1416,74 @@ if (dvtTests) {
     radio.addEventListener('change', computeDVTCombinedLR)
   );
 }
+
+// Appendicitis multi-test likelihood combination
+function computeAppendicitisCombinedLR() {
+  const mapping = {
+    'appendicitis-test-ultrasound': { sn: 0.85, sp: 0.90 },
+    'appendicitis-test-ct':         { sn: 0.94, sp: 0.95 }
+  };
+  let combinedLR = 1;
+  Object.keys(mapping).forEach(name => {
+    const val = document.querySelector(`input[name="${name}"]:checked`).value;
+    const { sn, sp } = mapping[name];
+    const lrPlus  = sn/(1-sp);
+    const lrMinus = (1-sn)/sp;
+    if (val === 'pos') combinedLR *= lrPlus;
+    else if (val === 'neg') combinedLR *= lrMinus;
+  });
+  S.lrPlus = combinedLR;
+  updatePostProbs();
+  uiRefresh();
+}
+
+// Sepsis multi-test likelihood combination
+function computeSepsisCombinedLR() {
+  const mapping = {
+    'sepsis-test-crp': { sn: 0.80, sp: 0.60 },
+    'sepsis-test-pct': { sn: 0.76, sp: 0.70 }
+  };
+  let combinedLR = 1;
+  Object.keys(mapping).forEach(name => {
+    const val = document.querySelector(`input[name="${name}"]:checked`).value;
+    const { sn, sp } = mapping[name];
+    const lrPlus  = sn/(1-sp);
+    const lrMinus = (1-sn)/sp;
+    if (val === 'pos') combinedLR *= lrPlus;
+    else if (val === 'neg') combinedLR *= lrMinus;
+  });
+  S.lrPlus = combinedLR;
+  updatePostProbs();
+  uiRefresh();
+}
+
+// Acute Heart Failure multi-test likelihood combination
+function computeAHFCombinedLR() {
+  const mapping = {
+    'ahf-test-bnp':      { sn: 0.90, sp: 0.76 },
+    'ahf-test-ntprobnp': { sn: 0.90, sp: 0.75 }
+  };
+  let combinedLR = 1;
+  Object.keys(mapping).forEach(name => {
+    const val = document.querySelector(`input[name="${name}"]:checked`).value;
+    const { sn, sp } = mapping[name];
+    const lrPlus  = sn/(1-sp);
+    const lrMinus = (1-sn)/sp;
+    if (val === 'pos') combinedLR *= lrPlus;
+    else if (val === 'neg') combinedLR *= lrMinus;
+  });
+  S.lrPlus = combinedLR;
+  updatePostProbs();
+  uiRefresh();
+}
+
+// Attach listeners to the new panels
+document.querySelectorAll('#appendicitis-tests input[type="radio"]')
+        .forEach(radio => radio.addEventListener('change', computeAppendicitisCombinedLR));
+document.querySelectorAll('#sepsis-tests input[type="radio"]')
+        .forEach(radio => radio.addEventListener('change', computeSepsisCombinedLR));
+document.querySelectorAll('#ahf-tests input[type="radio"]')
+        .forEach(radio => radio.addEventListener('change', computeAHFCombinedLR));
 
 function resetExampleState() {
   // clear selection
